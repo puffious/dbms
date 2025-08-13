@@ -2,34 +2,34 @@ SET SESSION sql_require_primary_key = 0;
 
 -- create tables
 
-create table deposit (
-    ACTNO varchar(20), 
-    CNAME varchar(18), 
-    BNAME varchar(18), 
-    AMOUNT float, 
-    ADATE date
+CREATE TABLE deposit (
+    actno VARCHAR(20),
+    cname VARCHAR(18),
+    bname VARCHAR(18),
+    amount FLOAT,
+    adate DATE
 );
 
-create table branch (
-    BNAME varchar(18), 
-    CITY varchar(18)
+CREATE TABLE branch (
+    bname VARCHAR(18),
+    city VARCHAR(18)
 );
 
-create table customers (
-    CNAME varchar(19), 
-    city varchar(18)
+CREATE TABLE customers (
+    cname VARCHAR(19), 
+    city VARCHAR(18)
 );
 
-create table borrow (
-    LOANNO varchar(5), 
-    CNAME varchar(18), 
-    BNAME varchar(18), 
-    AMOUNT decimal(8,2)
+CREATE TABLE borrow (
+    loanno VARCHAR(5), 
+    cname VARCHAR(18), 
+    bname VARCHAR(18), 
+    amount DECIMAL(8,2)
 );
 
 -- insert data in tables
 
-insert into deposit values 
+INSERT INTO deposit VALUES 
 ('100', 'ANIL', 'VRCE', 1000.00, '1995-03-01'),
 ('101', 'SUNIL', 'AJNI', 5000.00, '1996-01-04'),
 ('102', 'MEHUL', 'KHAROLBAGH', 3500.00, '1995-11-17'),
@@ -40,7 +40,7 @@ insert into deposit values
 ('108', 'KRANTI', 'NEHRU PLACE', 5000, '1995-07-02'),
 ('109', 'MINU', 'POWAI', 7000, '1995-08-10');
 
-insert into branch values
+INSERT INTO branch VALUES
 ('VRCE', 'NAGPUR'),
 ('AJNI', 'NAGPUR'),
 ('KHAROLBAGH', 'DELHI'),
@@ -63,7 +63,7 @@ INSERT INTO customers VALUES
 ('KRANTI', 'BOMBAY'), 
 ('NAREN', 'BOMBAY');
 
-insert into borrow values
+INSERT INTO borrow VALUES
 (201, 'ANIL', 'VRCE', 1000.00),
 (206, 'MEHUL', 'AJNI', 5000.00),
 (311, 'SUNIL', 'DHARAMPETH', 3000.00),
@@ -72,10 +72,10 @@ insert into borrow values
 (481, 'KRANTI', 'NEHRU PLACE', 3000.00);
 
 -- Q1) Describe deposit, branch
-desc deposit;
-desc branch;
+DESC deposit;
+DESC branch;
 
 -- Q2) Describe borrow, customers
-desc borrow;
-desc customers;
+DESC borrow;
+DESC customers;
 

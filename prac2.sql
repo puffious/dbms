@@ -1,25 +1,25 @@
 -- Q1) List all data from table DEPOSIT.
-select * from deposit;
+SELECT * FROM deposit;
 
 -- Q2) List all data from table BORROW.
-select * from borrow;
+SELECT * FROM borrow;
 
 -- Q3) List all data from table CUSTOMERS.
-select * from customers;
+SELECT * FROM customers;
 
 -- Q4) List all data from table BRANCH.
-select * from branch;
+SELECT * FROM branch;
 
 -- Q5) give account no and amount of depositors.
-select ACTNO, AMOUNT from deposit;
+SELECT actno, amount FROM deposit;
 
 -- Q6) Give name of depositors having amount greater than 4000.
-select CNAME from deposit
-where AMOUNT > 4000;
+SELECT cname FROM deposit
+WHERE amount > 4000;
 
 -- Q7) Give name of customers who opened account after date '1-12-95'
-select CNAME from deposit
-where ADATE > '1995-12-1';
+SELECT cname FROM deposit
+WHERE adate > '1995-12-1';
 
 -- Q8) Describe customer table
-desc customers;
+DESC customers;
