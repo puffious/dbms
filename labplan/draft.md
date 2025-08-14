@@ -265,7 +265,8 @@ This query requires filtering both before and after grouping. Use `WHERE city = 
 +-------------+
 | POWAI       |
 +-------------+
-```</details>
+```
+</details>
 
 ---
 
