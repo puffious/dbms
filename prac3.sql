@@ -1,4 +1,4 @@
--- 1> Create table job having fields like job_id primary key, job_name,min_sal and max_sal.
+-- 3> Create table job having fields like job_id primary key, job_name,min_sal and max_sal.
 CREATE TABLE job (
     job_id VARCHAR(10), 
     job_name VARCHAR(30), 
@@ -14,7 +14,8 @@ CREATE TABLE dept (
     dept_name VARCHAR(10), 
     job_id VARCHAR(10),
     dept_loc VARCHAR(15),
-    PRIMARY KEY (dept_no)
+    PRIMARY KEY (dept_no),
+    FOREIGN KEY (job_id) REFERENCES job(job_id)
 );
 
 -- 1> create table Emp with the following fields and constraints.
