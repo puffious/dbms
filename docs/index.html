@@ -198,8 +198,9 @@
                 contentDiv.innerHTML = '<p class="loading">Loading...</p>';
                 contentDiv.classList.add('active');
                 
-                // Try to fetch from the markdown folder (relative path)
-                const response = await fetch(`../markdown/${filename}`);
+                // Fetch from raw GitHub content
+                const repoPath = 'https://raw.githubusercontent.com/puffious/dbms/main/markdown/';
+                const response = await fetch(`${repoPath}${filename}`);
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
