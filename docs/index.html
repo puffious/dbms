@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBMS Practicals - Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.2.0/github-markdown.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: #f6f8fa;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e1e4e8;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+        
+        .file-list {
+            list-style: none;
+        }
+        
+        .file-list li {
+            margin-bottom: 8px;
+        }
+        
+        .file-list a {
+            display: block;
+            padding: 8px 12px;
+            color: #0366d6;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        .file-list a:hover {
+            background-color: #f1f8ff;
+        }
+        
+        .file-list a.active {
+            background-color: #e1f0ff;
+            color: #0366d6;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        
+        .welcome {
+            background: white;
+            padding: 30px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .welcome h1 {
+            color: #24292e;
+            margin-bottom: 16px;
+        }
+        
+        .welcome p {
+            color: #586069;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .markdown-content {
+            background: white;
+            padding: 30px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+        
+        .markdown-content.active {
+            display: block;
+        }
+        
+        .markdown-content.markdown-body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .loading {
+            color: #586069;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e1e4e8;
+                max-height: 200px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>📚 Practicals</h2>
+            <ul class="file-list" id="fileList">
+                <li><p class="loading">Loading files...</p></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <div class="welcome" id="welcome">
+                <h1>📖 DBMS Practicals Documentation</h1>
+                <p>Welcome to the DBMS Practicals documentation site.</p>
+                <p>Select a practical from the sidebar to view its documentation and SQL queries.</p>
+                <p>This site contains markdown documentation for all practical exercises, along with SQL code and expected outputs.</p>
+            </div>
+            
+            <div class="markdown-content markdown-body" id="content">
+                <!-- Content will be loaded here -->
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        const fileList = document.getElementById('fileList');
+        const contentDiv = document.getElementById('content');
+        const welcomeDiv = document.getElementById('welcome');
+        
+        // List of markdown files in the markdown folder
+        const mdFiles = [
+            'prac1.md',
+            'prac2.md',
+            'prac3.md',
+            'prac4.md',
+            'prac5.md',
+            'prac6.md',
+            'prac7.md',
+            'prac8.md',
+            'prac9.md',
+            'prac10.md'
+        ];
+        
+        // Populate file list
+        function populateFileList() {
+            fileList.innerHTML = '';
+            mdFiles.forEach(file => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.textContent = file.replace('.md', '').toUpperCase();
+                a.onclick = (e) => {
+                    e.preventDefault();
+                    loadMarkdown(file);
+                    setActiveLink(a);
+                };
+                li.appendChild(a);
+                fileList.appendChild(li);
+            });
+        }
+        
+        // Load markdown file
+        async function loadMarkdown(filename) {
+            try {
+                welcomeDiv.style.display = 'none';
+                contentDiv.innerHTML = '<p class="loading">Loading...</p>';
+                contentDiv.classList.add('active');
+                
+                // Try to fetch from the markdown folder (relative path)
+                const response = await fetch(`../markdown/${filename}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const markdown = await response.text();
+                const html = marked.parse(markdown);
+                contentDiv.innerHTML = html;
+                contentDiv.classList.add('markdown-body');
+            } catch (error) {
+                contentDiv.innerHTML = `<div style="color: #d73a49; padding: 20px; background: #ffeef0; border-radius: 6px;">
+                    <strong>Error loading file:</strong> ${filename}<br>
+                    <small>${error.message}</small>
+                </div>`;
+                console.error('Error:', error);
+            }
+        }
+        
+        // Set active link styling
+        function setActiveLink(link) {
+            document.querySelectorAll('.file-list a').forEach(a => {
+                a.classList.remove('active');
+            });
+            link.classList.add('active');
+        }
+        
+        // Initialize
+        populateFileList();
+    </script>
+</body>
+</html>
