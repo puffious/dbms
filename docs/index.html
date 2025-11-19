@@ -7,6 +7,53 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.2.0/github-markdown.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
+        /* Override github-markdown-css to ensure consistent colors */
+        .markdown-body {
+            color: #24292e !important;
+        }
+        
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3,
+        .markdown-body h4,
+        .markdown-body h5,
+        .markdown-body h6 {
+            color: #24292e !important;
+        }
+        
+        .markdown-body p,
+        .markdown-body li,
+        .markdown-body strong,
+        .markdown-body em {
+            color: #24292e !important;
+        }
+        
+        .markdown-body code {
+            color: #24292e !important;
+            background-color: #f6f8fa !important;
+        }
+        
+        .markdown-body pre {
+            background-color: #f6f8fa !important;
+        }
+        
+        .markdown-body pre code {
+            color: #24292e !important;
+        }
+        
+        .markdown-body table tr {
+            background-color: white !important;
+        }
+        
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa !important;
+        }
+        
+        .markdown-body table th,
+        .markdown-body table td {
+            color: #24292e !important;
+            border-color: #e1e4e8 !important;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -97,6 +144,7 @@
             border-radius: 6px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             display: none;
+            color: #24292e;
         }
         
         .markdown-content.active {
@@ -106,6 +154,54 @@
         .markdown-content.markdown-body {
             font-size: 16px;
             line-height: 1.6;
+            color: #24292e;
+        }
+        
+        .markdown-content.markdown-body h1,
+        .markdown-content.markdown-body h2,
+        .markdown-content.markdown-body h3,
+        .markdown-content.markdown-body h4,
+        .markdown-content.markdown-body h5,
+        .markdown-content.markdown-body h6 {
+            color: #24292e;
+            border-bottom-color: #e1e4e8;
+        }
+        
+        .markdown-content.markdown-body p,
+        .markdown-content.markdown-body li,
+        .markdown-content.markdown-body td,
+        .markdown-content.markdown-body th {
+            color: #24292e;
+        }
+        
+        .markdown-content.markdown-body code {
+            color: #24292e;
+            background-color: #f6f8fa;
+        }
+        
+        .markdown-content.markdown-body pre {
+            background-color: #f6f8fa;
+            color: #24292e;
+        }
+        
+        .markdown-content.markdown-body table {
+            border-collapse: collapse;
+        }
+        
+        .markdown-content.markdown-body table tr {
+            background-color: white;
+            border-top-color: #e1e4e8;
+        }
+        
+        .markdown-content.markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        
+        .markdown-content.markdown-body table th,
+        .markdown-content.markdown-body table td {
+            border-color: #e1e4e8;
+            color: #24292e;
+            padding: 8px 12px;
         }
         
         .loading {

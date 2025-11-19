@@ -1,13 +1,5 @@
 # DBMS Practicals
 
-A comprehensive collection of DBMS practical exercises with SQL queries and documentation.
-
-## 📖 Documentation
-
-View the interactive documentation site: [https://puffious.github.io/dbms](https://puffious.github.io/dbms)
-
-The documentation site provides a clean interface to browse and preview all markdown documents for each practical.
-
 ## Practical Exercises
 
 | Practical Number | Code Link |
