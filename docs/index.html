@@ -79,6 +79,24 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            color: #24292e;
+        }
+        
+        .hamburger-menu:hover {
+            color: #0366d6;
+        }
+        
+        .sidebar.mobile-closed {
+            display: none;
+        }
+        
         .sidebar h2 {
             font-size: 16px;
             font-weight: 600;
@@ -214,22 +232,53 @@
                 flex-direction: column;
             }
             
+            .hamburger-menu {
+                display: block;
+            }
+            
             .sidebar {
                 width: 100%;
                 border-right: none;
                 border-bottom: 1px solid #e1e4e8;
-                max-height: 200px;
+                max-height: 0;
+                overflow: hidden;
+                padding: 0;
+                transition: max-height 0.3s ease-in-out;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .sidebar.mobile-open {
+                max-height: 400px;
+                padding: 20px;
+                overflow-y: scroll;
             }
             
             .main-content {
                 padding: 20px;
+                padding-top: 60px;
+            }
+            
+            .menu-header {
+                display: flex;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #e1e4e8;
+                margin-bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <aside class="sidebar">
+        <button class="hamburger-menu" id="hamburgerBtn" title="Menu">☰</button>
+        
+        <aside class="sidebar" id="sidebar">
             <h2>📚 Practicals</h2>
             <ul class="file-list" id="fileList">
                 <li><p class="loading">Loading files...</p></li>
@@ -254,6 +303,20 @@
         const fileList = document.getElementById('fileList');
         const contentDiv = document.getElementById('content');
         const welcomeDiv = document.getElementById('welcome');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const sidebar = document.getElementById('sidebar');
+        
+        // Hamburger menu toggle
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-open');
+        });
+        
+        // Close menu when a file is selected
+        function closeMenu() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('mobile-open');
+            }
+        }
         
         // List of markdown files in the markdown folder
         const mdFiles = [
@@ -281,6 +344,7 @@
                     e.preventDefault();
                     loadMarkdown(file);
                     setActiveLink(a);
+                    closeMenu();
                 };
                 li.appendChild(a);
                 fileList.appendChild(li);
@@ -322,6 +386,13 @@
             });
             link.classList.add('active');
         }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburgerBtn.contains(e.target) && !sidebar.contains(e.target)) {
+                sidebar.classList.remove('mobile-open');
+            }
+        });
         
         // Initialize
         populateFileList();
